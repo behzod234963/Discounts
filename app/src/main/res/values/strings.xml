@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Discounts</string>
+    <string name="skip">Skip</string>
+    <string name="enjoyful_interface">Simple and user-friendly interface</string>
+    <string name="discounts_at_every_turn">Discounts at every turn!</string>
+    <string name="continue_">Continue</string>
 </resources>

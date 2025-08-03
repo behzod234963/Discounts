@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Discounts</string>
+    <string name="skip">Пропустить</string>
+    <string name="enjoyful_interface">Простой и удобный интерфейс</string>
+    <string name="discounts_at_every_turn">Скидки на каждом шагу!</string>
+    <string name="continue_">Продолжить</string>
+</resources>

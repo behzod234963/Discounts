@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Discounts</string>
+    <string name="skip">O\'tkazib yuborish</string>
+    <string name="enjoyful_interface">Oddiy va qulay interfeys</string>
+    <string name="discounts_at_every_turn">Chegirmalar har qadamda!</string>
+    <string name="continue_">Davom etish</string>
+</resources>
