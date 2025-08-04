@@ -1,4 +1,4 @@
-package com.mr.anonym.discounts.ui.screens.main
+package com.mr.anonym.discounts.ui.screens.mainScreen
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable

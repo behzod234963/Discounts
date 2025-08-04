@@ -1,22 +1,45 @@
 package com.mr.anonym.discounts.presentation.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavGraph
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.mr.anonym.discounts.ui.screens.onBoarding.OnBoardingScreen
+import com.mr.anonym.data.local.instance.SharedPreferencesInstance
+import com.mr.anonym.discounts.ui.screens.informationScreen.InformationScreen
+import com.mr.anonym.discounts.ui.screens.mainScreen.MainScreen
+import com.mr.anonym.discounts.ui.screens.onBoardingScreen.OnBoardingScreen
 
 @Composable
 fun NavGraph() {
 
+//    Context
+    val context = LocalContext.current
+
+//    Objects
+    val sharedPreferences = SharedPreferencesInstance(context)
+
+//    Booleans
+    val firstLaunchState = sharedPreferences.firstLaunchState()
+
+//    State
     val navController = rememberNavController()
+
     NavHost(
         navController = navController,
-        startDestination = ScreensRouter.OnBoardingScreen.route
+        startDestination = when {
+            firstLaunchState -> ScreensRouter.OnBoardingScreen.route
+            else -> ScreensRouter.MainScreen.route
+        }
     ){
         composable(ScreensRouter.OnBoardingScreen.route) {
             OnBoardingScreen(navController)
+        }
+        composable (ScreensRouter.InformationScreen.route ){
+            InformationScreen(navController)
+        }
+        composable (ScreensRouter.MainScreen.route ){
+            MainScreen(navController)
         }
     }
 }

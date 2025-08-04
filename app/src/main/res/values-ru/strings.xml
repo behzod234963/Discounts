@@ -5,4 +5,6 @@
     <string name="enjoyful_interface">Простой и удобный интерфейс</string>
     <string name="discounts_at_every_turn">Скидки на каждом шагу!</string>
     <string name="continue_">Продолжить</string>
+    <string name="show_where_i_am">Показывать где я</string>
+    <string name="grant_permission">Предоставить разрешение</string>
 </resources>

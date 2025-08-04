@@ -18,4 +18,16 @@ class SharedPreferencesInstance(private val context: Context) {
     }
     fun darkThemeState(): Boolean =
         sharedPreferences.getBoolean("DarkTheme",true)
+
+    fun isFirstLaunch(state: Boolean){
+        sharedPreferences.edit{ putBoolean( "FirstLaunch" , state ) }
+    }
+    fun firstLaunchState(): Boolean =
+        sharedPreferences.getBoolean("FirstLaunch",true)
+
+    fun showLocation(state: Boolean){
+        sharedPreferences.edit{ putBoolean( "showLocation" , state ) }
+    }
+    fun locationVisibilityState(): Boolean =
+        sharedPreferences.getBoolean( "showLocation" , false )
 }

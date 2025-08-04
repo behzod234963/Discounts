@@ -1,4 +1,4 @@
-package com.mr.anonym.discounts.ui.screens.onBoarding
+package com.mr.anonym.discounts.ui.screens.onBoardingScreen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.shape.RoundedCornerShape

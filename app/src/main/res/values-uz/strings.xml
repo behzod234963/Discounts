@@ -5,4 +5,6 @@
     <string name="enjoyful_interface">Oddiy va qulay interfeys</string>
     <string name="discounts_at_every_turn">Chegirmalar har qadamda!</string>
     <string name="continue_">Davom etish</string>
+    <string name="show_where_i_am">Qayerdaligimni ko\'rsatish</string>
+    <string name="grant_permission">Ruxsat berish</string>
 </resources>
