@@ -29,5 +29,5 @@ class SharedPreferencesInstance(private val context: Context) {
         sharedPreferences.edit{ putBoolean( "showLocation" , state ) }
     }
     fun locationVisibilityState(): Boolean =
-        sharedPreferences.getBoolean( "showLocation" , false )
+        sharedPreferences.getBoolean( "showLocation" , true )
 }

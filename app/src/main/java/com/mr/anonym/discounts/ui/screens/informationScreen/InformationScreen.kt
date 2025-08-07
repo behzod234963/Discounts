@@ -1,12 +1,14 @@
 package com.mr.anonym.discounts.ui.screens.informationScreen
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.BorderStroke
+import android.os.Build
+import androidx.activity.compose.LocalActivity
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +21,9 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,13 +31,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.mr.anonym.data.local.instance.SharedPreferencesInstance
 import com.mr.anonym.discounts.R
+import com.mr.anonym.discounts.presentation.managers.PermissionManager
+import com.mr.anonym.discounts.presentation.navigation.ScreensRouter
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun InformationScreen(
@@ -41,14 +50,20 @@ fun InformationScreen(
 
 //    Contexts & Scopes
     val context = LocalContext.current
+    val activity = LocalActivity.current
 
 //    Objects
     val sharedPreferences = SharedPreferencesInstance(context)
+    val permissionManager = PermissionManager(context = context, activity = activity)
 
 //    Booleans
     val systemThemeState = sharedPreferences.systemThemeState()
     val darkThemeState = sharedPreferences.darkThemeState()
     val locationVisibilityState = sharedPreferences.locationVisibilityState()
+    val isLocationPermissionRequested = remember { mutableStateOf( false ) }
+    val isNotificationPermissionRequested = remember { mutableStateOf( false ) }
+    val isLocationPermissionGranted = permissionManager.checkLocationPermission()
+    val isNotificationPermissionGranted = permissionManager.checkNotificationPermission()
 
 //    Colors
     val componentColor = Color(67, 123, 205, 255)
@@ -64,11 +79,16 @@ fun InformationScreen(
         darkThemeState -> Color.White
         else -> Color.Black
     }
-    val systemItemsColor = if (isSystemInDarkTheme()) Color(16, 15, 15, 255) else Color.White
-    val itemsColor = when {
-        systemThemeState -> systemItemsColor
-        darkThemeState -> Color(16, 15, 15, 255)
-        else -> Color.White
+
+//    Helpers
+    LaunchedEffect(isLocationPermissionRequested.value) {
+        if ( isLocationPermissionGranted ){
+            navController.navigate(ScreensRouter.LocationScreen.route)
+        }
+    }
+    LaunchedEffect( isNotificationPermissionRequested.value ) {
+        if ( isNotificationPermissionGranted ){
+        }
     }
 
 //    UI
@@ -97,6 +117,18 @@ fun InformationScreen(
                     painter = painterResource( if ( locationVisibilityState ) R.drawable.ic_location else R.drawable.ic_notification ),
                     contentDescription = ""
                 )
+                Spacer(Modifier.height(30.dp))
+                Text(
+                    text = stringResource( if ( locationVisibilityState )
+                        R.string.location_permission_instruction
+                        else
+                        R.string.notification_permission_instruction
+                    ),
+                    fontSize = 20.sp,
+                    color = secondaryColor,
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.Center
+                )
             }
             Button(
                 modifier = Modifier
@@ -107,7 +139,15 @@ fun InformationScreen(
                     contentColor = componentColor
                 ),
                 shape = RoundedCornerShape(10.dp),
-                onClick = {  }
+                onClick = {
+                    if ( locationVisibilityState ){
+                        permissionManager.requestLocationPermission()
+                        isLocationPermissionRequested.value = true
+                    }else{
+                        permissionManager.requestNotificationPermission()
+                        isNotificationPermissionRequested.value = true
+                    }
+                }
             ) {
                 Text(
                     text = stringResource( if (locationVisibilityState) R.string.show_where_i_am else R.string.grant_permission ),
@@ -120,6 +160,7 @@ fun InformationScreen(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Preview
 @Composable
 private fun PreviewInformationScreen() {

@@ -7,4 +7,6 @@
     <string name="continue_">Davom etish</string>
     <string name="show_where_i_am">Qayerdaligimni ko\'rsatish</string>
     <string name="grant_permission">Ruxsat berish</string>
+    <string name="location_permission_instruction">Sizga yaqin chegirmali do\'konlarni ko\‘rsatish uchun joylashuvingizni aniqlashimiz kerak.\nIltimos, ruxsatingizni bering.</string>
+    <string name="notification_permission_instruction">Muhim voqealarni o\'tkazib yubormaslik uchun iltimos, bildirishnomalarga ruxsat bering.</string>
 </resources>

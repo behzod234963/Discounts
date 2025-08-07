@@ -19,6 +19,9 @@ lifecycleVersion = "2.9.2"
 roomVersion = "2.7.2"
 lottieVersion = "6.6.7"
 systemUiControllerVersion = "0.36.0"
+osmAndroidVersion = "6.1.20"
+osmComposeVersion = "0.0.5"
+gmsLocationVersion = "21.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -63,6 +66,11 @@ lottieanimations = {group = "com.airbnb.android",name = "lottie-compose",version
 
 # SystemUiController
 systemUiController = { group = "com.google.accompanist" , name = "accompanist-systemuicontroller" , version.ref = "systemUiControllerVersion" }
+
+# Open Street Map & location
+osmAndroid = { group = "org.osmdroid" , name = "osmdroid-android" , version.ref = "osmAndroidVersion" }
+osmCompose = { group = "tech.utsmankece" , name = "osm-android-compose" , version.ref = "osmComposeVersion" }
+gmsLocation = { group = "com.google.android.gms" , name = "play-services-location" , version.ref = "gmsLocationVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

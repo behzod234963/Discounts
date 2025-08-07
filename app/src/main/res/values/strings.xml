@@ -6,4 +6,6 @@
     <string name="continue_">Continue</string>
     <string name="show_where_i_am">Show where I am</string>
     <string name="grant_permission">Grant permission</string>
+    <string name="location_permission_instruction">We need to determine your location to show nearby stores with discounts.\n Your permission is required.</string>
+    <string name="notification_permission_instruction">Please allow notifications so you don\'t miss important updates.</string>
 </resources>

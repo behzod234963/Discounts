@@ -7,4 +7,6 @@
     <string name="continue_">Продолжить</string>
     <string name="show_where_i_am">Показывать где я</string>
     <string name="grant_permission">Предоставить разрешение</string>
+    <string name="location_permission_instruction">Необходимо определить ваше местоположение, чтобы показать магазины со скидками рядом с вами.\nПожалуйста, предоставьте разрешение.</string>
+    <string name="notification_permission_instruction">Пожалуйста разрешите отправку уведомления, чтобы не пропустить важные события.</string>
 </resources>

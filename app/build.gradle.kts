@@ -93,4 +93,9 @@ dependencies {
 
     //    Lottie animations
     implementation(libs.lottieanimations)
+
+    //    Open Street Map & Location
+    implementation(libs.osmAndroid)
+    implementation(libs.osmCompose)
+    implementation(libs.gmsLocation)
 }
