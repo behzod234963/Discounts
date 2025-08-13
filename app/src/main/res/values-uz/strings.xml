@@ -9,4 +9,9 @@
     <string name="grant_permission">Ruxsat berish</string>
     <string name="location_permission_instruction">Sizga yaqin chegirmali do\'konlarni ko\‘rsatish uchun joylashuvingizni aniqlashimiz kerak.\nIltimos, ruxsatingizni bering.</string>
     <string name="notification_permission_instruction">Muhim voqealarni o\'tkazib yubormaslik uchun iltimos, bildirishnomalarga ruxsat bering.</string>
+    <string name="unknown">No\'malum</string>
+    <string name="no">Yo\'q</string>
+    <string name="yes">Xa</string>
+    <string name="your_location">"Sizning joylashuvingiz: "</string>
+    <string name="search">Qidirish</string>
 </resources>

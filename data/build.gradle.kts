@@ -53,4 +53,7 @@ dependencies {
     ksp(libs.roomCompiler)
 
     implementation(project(":domain"))
+
+//    Data Store
+    implementation(libs.androidx.dataStore)
 }

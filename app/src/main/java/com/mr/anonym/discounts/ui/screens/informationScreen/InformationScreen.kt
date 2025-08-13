@@ -2,7 +2,6 @@ package com.mr.anonym.discounts.ui.screens.informationScreen
 
 import android.annotation.SuppressLint
 import android.os.Build
-import androidx.activity.compose.LocalActivity
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -21,7 +20,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -50,20 +48,17 @@ fun InformationScreen(
 
 //    Contexts & Scopes
     val context = LocalContext.current
-    val activity = LocalActivity.current
 
 //    Objects
     val sharedPreferences = SharedPreferencesInstance(context)
-    val permissionManager = PermissionManager(context = context, activity = activity)
+    val permissionManager = PermissionManager(context = context)
 
 //    Booleans
     val systemThemeState = sharedPreferences.systemThemeState()
     val darkThemeState = sharedPreferences.darkThemeState()
     val locationVisibilityState = sharedPreferences.locationVisibilityState()
-    val isLocationPermissionRequested = remember { mutableStateOf( false ) }
-    val isNotificationPermissionRequested = remember { mutableStateOf( false ) }
-    val isLocationPermissionGranted = permissionManager.checkLocationPermission()
-    val isNotificationPermissionGranted = permissionManager.checkNotificationPermission()
+    val isLocationPermissionRequested = remember { mutableStateOf(false) }
+    val isNotificationPermissionRequested = remember { mutableStateOf(false) }
 
 //    Colors
     val componentColor = Color(67, 123, 205, 255)
@@ -81,13 +76,17 @@ fun InformationScreen(
     }
 
 //    Helpers
-    LaunchedEffect(isLocationPermissionRequested.value) {
-        if ( isLocationPermissionGranted ){
-            navController.navigate(ScreensRouter.LocationScreen.route)
+    when{
+        isLocationPermissionRequested.value ->{
+            permissionManager.RequestLocationPermission {
+                navController.navigate(ScreensRouter.LocationScreen.route)
+            }
         }
-    }
-    LaunchedEffect( isNotificationPermissionRequested.value ) {
-        if ( isNotificationPermissionGranted ){
+        isNotificationPermissionRequested.value ->{
+            permissionManager.RequestNotificationPermission {
+                sharedPreferences.isFirstLaunch(false)
+                navController.navigate(ScreensRouter.MainScreen.route)
+            }
         }
     }
 
@@ -114,17 +113,18 @@ fun InformationScreen(
                 Image(
                     modifier = Modifier
                         .size(100.dp),
-                    painter = painterResource( if ( locationVisibilityState ) R.drawable.ic_location else R.drawable.ic_notification ),
+                    painter = painterResource(if (locationVisibilityState) R.drawable.ic_location else R.drawable.ic_notification),
                     contentDescription = ""
                 )
                 Spacer(Modifier.height(30.dp))
                 Text(
-                    text = stringResource( if ( locationVisibilityState )
-                        R.string.location_permission_instruction
+                    text = stringResource(
+                        if (locationVisibilityState)
+                            R.string.location_permission_instruction
                         else
-                        R.string.notification_permission_instruction
+                            R.string.notification_permission_instruction
                     ),
-                    fontSize = 20.sp,
+                    fontSize = 16.sp,
                     color = secondaryColor,
                     fontWeight = FontWeight.SemiBold,
                     textAlign = TextAlign.Center
@@ -136,21 +136,24 @@ fun InformationScreen(
                     .height(50.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = componentColor,
-                    contentColor = componentColor
+                    contentColor = componentColor,
                 ),
                 shape = RoundedCornerShape(10.dp),
                 onClick = {
-                    if ( locationVisibilityState ){
-                        permissionManager.requestLocationPermission()
+                    if (locationVisibilityState) {
                         isLocationPermissionRequested.value = true
-                    }else{
-                        permissionManager.requestNotificationPermission()
+                    } else {
                         isNotificationPermissionRequested.value = true
                     }
                 }
             ) {
                 Text(
-                    text = stringResource( if (locationVisibilityState) R.string.show_where_i_am else R.string.grant_permission ),
+                    text = stringResource(
+                        when {
+                            locationVisibilityState -> R.string.show_where_i_am
+                            else -> R.string.grant_permission
+                        }
+                    ),
                     color = Color.White,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold

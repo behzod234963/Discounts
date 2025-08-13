@@ -98,4 +98,7 @@ dependencies {
     implementation(libs.osmAndroid)
     implementation(libs.osmCompose)
     implementation(libs.gmsLocation)
+
+//    DataStore
+    implementation(libs.androidx.dataStore)
 }

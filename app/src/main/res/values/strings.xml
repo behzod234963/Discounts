@@ -8,4 +8,9 @@
     <string name="grant_permission">Grant permission</string>
     <string name="location_permission_instruction">We need to determine your location to show nearby stores with discounts.\n Your permission is required.</string>
     <string name="notification_permission_instruction">Please allow notifications so you don\'t miss important updates.</string>
+    <string name="unknown">Unknown</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="your_location">"Your location is: "</string>
+    <string name="search">Search</string>
 </resources>

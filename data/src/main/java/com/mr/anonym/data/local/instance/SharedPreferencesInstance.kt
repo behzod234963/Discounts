@@ -25,6 +25,7 @@ class SharedPreferencesInstance(private val context: Context) {
     fun firstLaunchState(): Boolean =
         sharedPreferences.getBoolean("FirstLaunch",true)
 
+
     fun showLocation(state: Boolean){
         sharedPreferences.edit{ putBoolean( "showLocation" , state ) }
     }

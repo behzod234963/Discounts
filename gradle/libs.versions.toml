@@ -1,5 +1,5 @@
 [versions]
-agp = "8.13.0-alpha03"
+agp = "8.13.0-alpha04"
 kotlin = "2.2.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -22,6 +22,7 @@ systemUiControllerVersion = "0.36.0"
 osmAndroidVersion = "6.1.20"
 osmComposeVersion = "0.0.5"
 gmsLocationVersion = "21.3.0"
+dataStoreVersion = "1.1.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -71,6 +72,9 @@ systemUiController = { group = "com.google.accompanist" , name = "accompanist-sy
 osmAndroid = { group = "org.osmdroid" , name = "osmdroid-android" , version.ref = "osmAndroidVersion" }
 osmCompose = { group = "tech.utsmankece" , name = "osm-android-compose" , version.ref = "osmComposeVersion" }
 gmsLocation = { group = "com.google.android.gms" , name = "play-services-location" , version.ref = "gmsLocationVersion" }
+
+# Data Store
+androidx-dataStore = { group = "androidx.datastore" , name  = "datastore-preferences" , version.ref = "dataStoreVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

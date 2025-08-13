@@ -1,5 +1,7 @@
 package com.mr.anonym.discounts.ui.screens.mainScreen
 
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -15,6 +17,7 @@ fun MainScreen(
 
 //    Contexts
     val context = LocalContext.current
+    val activityContext = LocalActivity.current
 
 //    Objects
     val sharedPreferences = SharedPreferencesInstance(context)
@@ -25,6 +28,7 @@ fun MainScreen(
 
 //    Colors
     val componentColor = Color(67, 123, 205, 255)
+    val errorContentColor = Color.Red
     val systemPrimaryColor = if (isSystemInDarkTheme()) Color.Black else Color.White
     val primaryColor = when {
         systemThemeState -> systemPrimaryColor
@@ -37,11 +41,22 @@ fun MainScreen(
         darkThemeState -> Color.White
         else -> Color.Black
     }
+    val systemTertiaryColor = if (isSystemInDarkTheme()) Color.DarkGray else Color.LightGray
+    val tertiaryColor = when {
+        systemThemeState -> systemTertiaryColor
+        darkThemeState -> Color.DarkGray
+        else -> Color.LightGray
+    }
     val systemItemsColor = if ( isSystemInDarkTheme() ) Color(16, 15, 15, 255) else Color.White
     val itemsColor = when {
         systemThemeState -> systemItemsColor
         darkThemeState -> Color(16, 15, 15, 255)
         else -> Color.White
+    }
+
+//    UI
+    BackHandler (enabled = true){
+        activityContext?.finish()
     }
 }
 
